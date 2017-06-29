@@ -14,11 +14,12 @@ using WPFClient.Helper.Tab;
 
 namespace WPFClient.ViewModel
 {
-    public class TabItem1ViewModel :  TabbedViewModelBase
+    public sealed class TabItem1ViewModel :  TabbedViewModelBase
     {
         private readonly IDialogService _dialogService;
         private TabItem1Model _tabItem1Model;
-        private TabItem1FilterModel filterModel = new TabItem1FilterModel();
+        private TabItem1FilterModel _filterModel;
+        public ICommand LoadedCommand { get; private set; }
 
         public ICommand SearchCommand { get; }
         
@@ -27,30 +28,42 @@ namespace WPFClient.ViewModel
         {
             this._dialogService = _dialogService;
             SearchCommand = new RelayCommand(SearchCommandHandler);
+            LoadedCommand = new RelayCommand(LoadedCommandHandler);
+            _tabItem1Model = new TabItem1Model();
+
+            //TODO avoid calling this in the contructor! It's an ugly Practice
             ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1FilterView>(ViewModelLocator.Instance.MainWindowViewModel, viewModel));
+        }
+
+        private void LoadedCommandHandler()
+        {
+            //SearchCommandHandler();
+            //ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1FilterView>(/*ViewModelLocator.Instance.MainWindowViewModel*/ this, viewModel));
         }
 
         private void SearchCommandHandler()
         {
-            //ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1Filter>(ViewModelLocator.Instance.MainWindowViewModel, viewModel));
             NavigateTo(ViewModelLocator.Instance.TabItem1ViewModel);
         }
 
         private void ShowDialog(Func<TabItem1FilterViewModel, bool?> showDialog)
         {
-            var dialogViewModel = new TabItem1FilterViewModel(filterModel);
-
-            bool? success = showDialog(dialogViewModel);
+            if (_filterModel == null)
+            {
+                _filterModel = new TabItem1FilterModel();
+            }
+           
+            bool? success = showDialog(new TabItem1FilterViewModel(_filterModel));
             if (success == true)
             {
-                _tabItem1Model = new TabItem1Model();
-                _tabItem1Model.Parameter1 = filterModel.Parameter1;
-                _tabItem1Model.Parameter2 = filterModel.Parameter2;
+                TabItem1Model tabItem1Model = new TabItem1Model();
+                tabItem1Model.Parameter1 = _filterModel.Parameter1;
+                tabItem1Model.Parameter2 = _filterModel.Parameter2;
+                TabItem1Model = tabItem1Model;
             }
             else {
-                    
+                Back(); 
             }
-
         }
 
         public override string TabName

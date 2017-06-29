@@ -11,7 +11,7 @@ using TabcontrolTest.ViewModel;
 
 namespace WPFClient.ViewModel
 {
-    public class ViewModelLocator
+    public sealed class ViewModelLocator
     {
 
         private static ViewModelLocator _instance;
@@ -81,12 +81,13 @@ namespace WPFClient.ViewModel
             }
         }
 
+        /*
         public TabItem1FilterViewModel TabItem1FilterViewModel
         {
             get
             {
                 return SimpleIoc.Default.GetInstance<TabItem1FilterViewModel>();
             }
-        }
+        }*/
     }
 }

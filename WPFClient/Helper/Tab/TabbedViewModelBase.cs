@@ -20,5 +20,10 @@ namespace WPFClient.Helper.Tab
         public void NavigateTo(TabbedViewModelBase to) {
             this._parent.SelectedTab.NavigateTo(to);
         }
+
+        public void Back()
+        {
+            this._parent.SelectedTab.Back();
+        }
     }
 }

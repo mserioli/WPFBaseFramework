@@ -21,7 +21,7 @@ using WPFLocalizeExtension.Engine;
 
 namespace WPFClient.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public sealed class MainWindowViewModel : ViewModelBase
     {
         #region Fields
         private readonly ObservableCollection<ITab> _tabs;
@@ -49,12 +49,13 @@ namespace WPFClient.ViewModel
             LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo(_selectedLocale.LocaleCode);
 
             NewTab = new RelayCommand(AddNewTab);
+            LoadedCommand = new RelayCommand(LoadedHandler);
             AboutCommand = new RelayCommand(
                          () =>
                          {
                              ShowDialog(viewModel => _dialogService.ShowDialog<AboutView>(this, viewModel));
                          });
-
+            BackCommand = new RelayCommand(BackCommandMethod);
         }
 
         public TabItem SelectedTab
@@ -86,6 +87,7 @@ namespace WPFClient.ViewModel
         }
         
         public ICommand NewTab { get; private set; }
+        public ICommand LoadedCommand { get; private set; }
 
         public ICommand AboutCommand { get; private set; }
 
@@ -96,19 +98,9 @@ namespace WPFClient.ViewModel
 
         }
 
-        private ICommand _backCommand;
-
         public ICommand BackCommand
         {
-            get
-            {
-                return _backCommand
-                    ?? (_backCommand = new RelayCommand(
-                         () =>
-                         {
-                             BackCommandMethod();
-                         }));
-            }
+            get; private set;
         }
 
         private ICommand _homeCommand;
@@ -207,6 +199,11 @@ namespace WPFClient.ViewModel
             tabItem.TabName = "Launcher";
             Tabs.Add(tabItem);
             SelectedTab = tabItem;            
+        }
+
+        private void LoadedHandler()
+        {
+            AddNewTab();
         }
 
         public ObservableCollection<ITab> Tabs

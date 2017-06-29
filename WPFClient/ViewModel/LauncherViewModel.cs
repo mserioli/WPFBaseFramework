@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace WPFClient.ViewModel
 {
-    public class LauncherViewModel : TabbedViewModelBase
+    public sealed class LauncherViewModel : TabbedViewModelBase
     {
         
         public LauncherViewModel(MainWindowViewModel _parent) : base (_parent)
@@ -36,8 +36,7 @@ namespace WPFClient.ViewModel
         }
 
         public RelayCommand<string> NavCommand { get; private set; }
-
-        
+                
 
         public override string TabName
         {
@@ -53,7 +52,5 @@ namespace WPFClient.ViewModel
                 return this.GetHashCode().ToString();
            }
         } 
-
-    }
-    
+    }    
 }

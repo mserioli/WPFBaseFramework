@@ -11,7 +11,7 @@ using TabcontrolTest.Model;
 
 namespace TabcontrolTest.ViewModel
 {
-    public class TabItem1FilterViewModel : ViewModelBase, IModalDialogViewModel
+    public sealed class TabItem1FilterViewModel : ViewModelBase, IModalDialogViewModel
     {
 
         private TabItem1FilterModel _filter;
@@ -20,10 +20,6 @@ namespace TabcontrolTest.ViewModel
         {
             ConfirmCommand = new RelayCommand(ConfirmCommandHandler, ConfirmCommandCanExecuteHandler);
             CancelCommand = new RelayCommand(CancelCommandHandler);
-
-            if (_filter == null) {
-                _filter = new TabItem1FilterModel();
-            }
             Filter = _filter;
             
         }
@@ -63,7 +59,6 @@ namespace TabcontrolTest.ViewModel
                 {
                     _filter = value;
                     RaisePropertyChanged("Filter");
-                    //ConfirmCommand.RaiseCanExecuteChanged();
                 }
             }
         }

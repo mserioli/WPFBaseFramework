@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace TabcontrolTest.ViewModel
 {
-    public class AboutViewModel : ViewModelBase, IModalDialogViewModel
+    public sealed class AboutViewModel : ViewModelBase, IModalDialogViewModel
     {
 
         public AboutViewModel()

@@ -8,9 +8,15 @@
              xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
              md:DialogServiceViews.IsRegistered="True"
              xmlns:local="clr-namespace:WPFClient"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              lex:ResxLocalizationProvider.DefaultAssembly="Translations"
              lex:ResxLocalizationProvider.DefaultDictionary="TabItem1">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"  />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -34,10 +40,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc Key=Parameter1}" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TabItem1Model.Parameter1}" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TabItem1Model.Parameter1}" />
 
         <TextBlock Grid.Row="1" Grid.Column="0" Text="{lex:Loc Key=Parameter2}" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TabItem1Model.Parameter2}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TabItem1Model.Parameter2}" />
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
                 <TextBlock Text="{lex:Loc Key=InstanceHashCode}" />

@@ -23,7 +23,7 @@
             <cmd:EventToCommand Command="{Binding WindowClosing}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding NewTab}"  />
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"  />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     

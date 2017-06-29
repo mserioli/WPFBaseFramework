@@ -14,7 +14,7 @@ using MvvmDialogs;
 
 namespace WPFClient.ViewModel
 {
-    public class TabItem2ViewModel : TabbedViewModelBase
+    public sealed class TabItem2ViewModel : TabbedViewModelBase
     {
         private readonly RelayCommand<PHU> _showPHUTubes;
         private readonly PhuService _phuService;
