@@ -19,6 +19,8 @@ namespace WPFClient
             NavigateTo(ViewModelLocator.Instance.LauncherViewModel);
         }
 
+        private readonly List<TabbedViewModelBase> _history = new List<TabbedViewModelBase>();
+
         private string _tabName;
 
         public string TabName {
@@ -36,8 +38,6 @@ namespace WPFClient
             }
 
         }
-
-        private List<TabbedViewModelBase> _history = new List<TabbedViewModelBase>();
 
         private TabbedViewModelBase _tabContent;
 
