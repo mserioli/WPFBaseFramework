@@ -1,0 +1,100 @@
+﻿<Window x:Class="WPFClient.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFClient"
+        mc:Ignorable="d"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:ResxLocalizationProvider.DefaultAssembly="Translations"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        lex:ResxLocalizationProvider.DefaultDictionary="MainWindow"
+        xmlns:ViewModel="clr-namespace:WPFClient.ViewModel"
+        xmlns:md="https://github.com/fantasticfiasco/mvvm-dialogs"
+        md:DialogServiceViews.IsRegistered="True"
+        xmlns:Helpers="clr-namespace:WPFClient.Helper.Tab"
+        xmlns:cmd ="http://www.galasoft.ch/mvvmlight"
+        xmlns:Views="clr-namespace:WPFClient.Views"
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource ViewModelLocator}}"
+        Title="{lex:Loc Key=ApplicationName}"
+        WindowState="Maximized">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <cmd:EventToCommand Command="{Binding WindowClosing}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding NewTab}"  />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <DockPanel  DockPanel.Dock="Top" >
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Stretch">
+                <Menu VerticalAlignment="Center" HorizontalAlignment="Stretch" >
+                    <MenuItem Header="{lex:Loc Key=File}">
+                        <MenuItem Header="{lex:Loc Key=NewTab}" Command="{Binding NewTab}"/>
+                        <MenuItem Header="{lex:Loc Key=CloseTab}" Command="{Binding CloseTab}"/>
+                            <MenuItem Header="{lex:Loc Key=Exit}" Command="{Binding ExitApp}"/>
+                    </MenuItem>
+                        <MenuItem Header="?">
+                            <MenuItem Header="{lex:Loc Key=About}" Command="{Binding AboutCommand}"/>
+                        </MenuItem>
+                    </Menu>
+            </DockPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Command="{Binding BackCommand}">
+                        <Image Source="/WPFClient;component/Icons/Back.png" />
+                    </Button>
+                    <Button Command="{Binding HomeCommand}">
+                        <Image Source="/WPFClient;component/Icons/Home.png" />
+                    </Button>
+                    <TextBlock  Text="{lex:Loc Key=Language}" VerticalAlignment="Center"/>
+                    <ComboBox HorizontalAlignment="Right" ItemsSource="{Binding Locales}" SelectedItem="{Binding SelectedLocale}" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+            
+            <TabControl 
+                    ItemsSource="{Binding Tabs}" 
+                    SelectedItem="{Binding SelectedTab, Mode=TwoWay}"
+                    IsSynchronizedWithCurrentItem="True">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type Helpers:ITab}">
+                        <TextBlock>
+                            <Run Text="{lex1:Loc Key=ControlName}"
+                                 xmlns:lex1="http://wpflocalizeextension.codeplex.com"
+                                lex1:ResxLocalizationProvider.DefaultAssembly="Translations"
+                                lex1:ResxLocalizationProvider.DefaultDictionary="{Binding TabContent.TabName, Mode=OneWay}"
+                                 />
+                            <Hyperlink Command="{Binding CloseCommand}">X</Hyperlink>
+                        </TextBlock>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding TabContent}" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+
+                <TabControl.Resources>
+                <DataTemplate DataType="{x:Type ViewModel:TabItem1ViewModel}">
+                    <Views:TabItem1View />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModel:TabItem2ViewModel}">
+                        <Views:TabItem2View />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModel:LauncherViewModel}">
+                        <Views:LauncherView />
+                </DataTemplate>
+            </TabControl.Resources>
+        </TabControl>
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -1,0 +1,40 @@
+﻿<Window x:Class="TabcontrolTest.Views.AboutView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TabcontrolTest.Views"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
+        lex:ResxLocalizationProvider.DefaultAssembly="Translations"
+        lex:ResxLocalizationProvider.DefaultDictionary="About"
+        mc:Ignorable="d"
+
+        DataContext="{Binding AboutWindowViewModel, Source={StaticResource ViewModelLocator}}"
+        Title="{lex:Loc Key=ControlName}" Height="220" Width="300">
+   
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc ProductName}" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ProductName}" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{lex:Loc Version}" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Version}" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{lex:Loc Copyright}" />
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Copyright}" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{lex:Loc CompanyName}" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CompanyName}" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{lex:Loc Description}" />
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Description}" TextWrapping="Wrap" IsEnabled="False" Height="80" Width="Auto" />
+            <Button  Grid.Row="5"  Grid.Column="1" IsDefault="True" Command="{Binding CloseCommand}" Content="{lex:Loc Close}" />
+        </Grid>
+</Window>
