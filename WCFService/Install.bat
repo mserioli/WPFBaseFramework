@@ -3,4 +3,5 @@
 sc delete SMST_MES_Application_Maintenance
 
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\InstallUtil.exe "C:\Users\Marco\Source\Repos\WPFBaseFramework\WCFService\bin\Debug\WCFService.exe"
+
 pause
