@@ -98,7 +98,7 @@ namespace WPFClient.ViewModel
 
         }
 
-        public ICommand BackCommand
+         public ICommand BackCommand
         {
             get; private set;
         }
@@ -125,7 +125,7 @@ namespace WPFClient.ViewModel
 
         private void BackCommandMethod()
         {
-            _selectedTab.Back();
+            SelectedTab.Back();
         }
 
         

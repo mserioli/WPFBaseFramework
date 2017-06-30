@@ -32,17 +32,16 @@ namespace WPFClient.ViewModel
             _tabItem1Model = new TabItem1Model();
 
             //TODO avoid calling this in the contructor! It's an ugly Practice
-            ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1FilterView>(ViewModelLocator.Instance.MainWindowViewModel, viewModel));
+            //ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1FilterView>(ViewModelLocator.Instance.MainWindowViewModel, viewModel));
         }
 
         private void LoadedCommandHandler()
         {
-            //SearchCommandHandler();
-            //ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1FilterView>(/*ViewModelLocator.Instance.MainWindowViewModel*/ this, viewModel));
+            ShowDialog(viewModel => _dialogService.ShowDialog<TabItem1FilterView>(this, viewModel));
         }
 
         private void SearchCommandHandler()
-        {
+        {   
             NavigateTo(ViewModelLocator.Instance.TabItem1ViewModel);
         }
 

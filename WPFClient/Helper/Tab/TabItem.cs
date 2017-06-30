@@ -33,7 +33,7 @@ namespace WPFClient
                 if (_tabName != value)
                 {
                     _tabName = value;
-                    RaisePropertyChanged(TabName);
+                    RaisePropertyChanged("TabName");
                 }
             }
 
@@ -51,7 +51,6 @@ namespace WPFClient
             {
                 if (_tabContent != value) { 
                     _tabContent = value;
-                    TabName = _tabContent.TabName;
                     RaisePropertyChanged("TabContent");
                 }
             }
@@ -82,6 +81,7 @@ namespace WPFClient
             {
                 _history.RemoveAt(0);
             }
+            
         }
     }
 }
