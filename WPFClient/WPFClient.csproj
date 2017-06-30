@@ -228,6 +228,10 @@
       <Project>{78be8bbf-77d3-4528-b30d-9e3d087b15e0}</Project>
       <Name>Translations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WCFClientProvider\WCFClientProvider.csproj">
+      <Project>{d7c90bd2-d993-45db-b9d2-295ee7e61fef}</Project>
+      <Name>WCFClientProvider</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\TabItem1.png" />

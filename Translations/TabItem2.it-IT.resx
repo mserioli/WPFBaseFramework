@@ -147,4 +147,7 @@
   <data name="PHUID" xml:space="preserve">
     <value>Identificativo Fascio</value>
   </data>
+  <data name="WCFTest" xml:space="preserve">
+    <value>Test WCF</value>
+  </data>
 </root>

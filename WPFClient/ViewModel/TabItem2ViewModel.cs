@@ -19,6 +19,7 @@ namespace WPFClient.ViewModel
         private readonly RelayCommand<PHU> _showPHUTubes;
         private readonly PhuService _phuService;
         private readonly IDialogService _dialogService;
+        private readonly ICommand _wcfTest;
 
         public  TabItem2ViewModel(IDialogService _dialogService, MainWindowViewModel _parent) : base(_parent)
         {
@@ -26,7 +27,14 @@ namespace WPFClient.ViewModel
             this._loaded = new RelayCommand(LoadedCommandHandler);
             this._dialogService = _dialogService;
             this._showPHUTubes = new RelayCommand<PHU>(ShowPHUTubesCommandHandler);
-            
+            this._wcfTest = new RelayCommand(WCFTestHandler);
+
+        }
+
+        private void WCFTestHandler()
+        {
+            WCFClientProvider.DataSelectionServiceProvider.Initialize(Properties.Settings.Default.DataSelectionServiceAddress);
+            WCFClientProvider.DataSelectionServiceProvider.Ping();
         }
 
         public RelayCommand<PHU> ShowPHUTubes
@@ -61,7 +69,15 @@ namespace WPFClient.ViewModel
                 return _loaded;
             }
         }
-        
+
+        public ICommand WCFTestCommand
+        {
+            get
+            {
+                return _wcfTest;
+            }
+        }
+
 
         private ObservableCollection<PHU> _PHUList;
 

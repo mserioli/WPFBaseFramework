@@ -6,22 +6,32 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
+using WCFService.ServicesInterfacesImpl;
 
 namespace WCFService
 {
-    public partial class Service1 : ServiceBase
+    public partial class MainService : ServiceBase
     {
-        public Service1()
+        public MainService()
         {
             InitializeComponent();
         }
 
         protected override void OnStart(string[] args)
         {
+#if DEBUG
+            Thread.Sleep(15000);
+#endif
+
+
+            DataSelectionService.StartService();
+
         }
 
         protected override void OnStop()
         {
+            DataSelectionService.CloseService();
         }
     }
 }

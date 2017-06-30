@@ -149,5 +149,14 @@ namespace Translations {
                 return ResourceManager.GetString("ShowPHUTubes", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WCF Test.
+        /// </summary>
+        public static string WCFTest {
+            get {
+                return ResourceManager.GetString("WCFTest", resourceCulture);
+            }
+        }
     }
 }

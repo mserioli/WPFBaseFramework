@@ -28,6 +28,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" Text="{lex:Loc Key=ParameterA}" />
@@ -67,6 +68,6 @@
             <TextBlock Text="{lex:Loc Key=InstanceHashCode}" />
             <TextBlock Text="{Binding InstanceHashCode}" />
         </StackPanel>
-       
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Content="{lex:Loc WCFTest}" Command="{Binding WCFTestCommand}" />
     </Grid>
 </UserControl>

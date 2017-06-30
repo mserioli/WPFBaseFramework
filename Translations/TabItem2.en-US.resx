@@ -147,4 +147,7 @@
   <data name="ShowPHUTubes" xml:space="preserve">
     <value>Show PHU's Tubes</value>
   </data>
+  <data name="WCFTest" xml:space="preserve">
+    <value>WCF Test</value>
+  </data>
 </root>
